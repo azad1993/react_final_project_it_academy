@@ -8,7 +8,9 @@ const reducer = (state = initialState, action) => {
     case "ADD_MOVIE":
       return { ...state, movies: action.payload };
     case "ADD_FAVORITES":
-      return { ...state, select: action.payload };
+      console.log(action.payload)
+      // return { ...state, movie: action.payload };
+      return state
     default:
       return state;
   }

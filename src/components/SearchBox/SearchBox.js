@@ -48,7 +48,7 @@ class SearchBox extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.movies);
+
   return state.movies;
 };
 

@@ -3,17 +3,12 @@ import { connect } from 'react-redux';
 import './MovieItem.css';
 
 class MovieItem extends Component {
-    state = {
-        select: "",
-      };
+    // state = {
+    //     select: "",
+    //   };
     
         
-    submitHandler = (e) => {
-        e.preventDefault();
-        console.log('me',e.target)
-        this.setState({ select: e.target.value });
-        this.props.addFavorites(e.target.value)
-    };
+   
 
     render() {
         const { Title, Year, Poster, imdbID } = this.props;
@@ -22,7 +17,7 @@ class MovieItem extends Component {
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                    <button type="button" key={imdbID} title={imdbID} value={this.props} onClick={this.submitHandler} className="movie-item__add-button">Добавить в список</button>
+                    <button type="button" key={imdbID} title={imdbID} onClick={()=>this.props.addFavorites(this.props)} className="movie-item__add-button">Добавить в список</button>
                 </div>
             </article>
         );
@@ -31,16 +26,12 @@ class MovieItem extends Component {
 
 
 
-const mapStateToProps = (store) => {
-    return {
-        select: store.select
-    }
-  }; 
+
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      addFavorites: (select) => dispatch({ type: "ADD_FAVORITES", payload: select}),
+      addFavorites: (movie) => dispatch({ type: "ADD_FAVORITES", payload: movie}),
     };
   };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);
+export default connect(mapDispatchToProps)(MovieItem);
