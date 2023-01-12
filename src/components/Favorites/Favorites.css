@@ -31,3 +31,6 @@
     opacity: 0.9;
     transition: all 0.2s linear;
 }
+.hidden{
+    display: none;
+}
