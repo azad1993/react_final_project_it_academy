@@ -46,11 +46,11 @@ class Favorites extends Component {
         />
         <ul className="favorites__list">
           {this.props.favouriteMovie.map((item, index) =>
-            this.props.favouriteMovie.indexOf(item) !== index ? null : (
+            
               <li key={item.imdbID}>
                 {item.Title} ({item.Year}){" "}
               </li>
-            )
+            
           )}
         </ul>
         <a href={`/list/${this.state.id}`} className={this.state.link ? "" : "hidden"}>

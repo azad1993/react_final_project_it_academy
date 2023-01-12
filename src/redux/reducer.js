@@ -8,8 +8,9 @@ const reducer = (state = initialState, action) => {
     case "ADD_MOVIE": 
       return { ...state, movies: action.payload }; 
     case "ADD_FAVORITES":   
-        
-      return { ...state, favouriteMovie:[...state.favouriteMovie,action.payload] }; 
+    var arr = [...state.favouriteMovie,action.payload];
+    var myarr = arr.map((item,index) =>  {return arr.indexOf(item) !== index ? null : item } )
+      return { ...state, favouriteMovie: myarr }; 
     default: 
       return state; 
   } 
