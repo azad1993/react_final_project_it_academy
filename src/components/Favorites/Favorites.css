@@ -34,3 +34,8 @@
 .hidden{
     display: none;
 }
+
+.favorites__lists{
+    display: flex;
+    justify-content: space-between;
+}

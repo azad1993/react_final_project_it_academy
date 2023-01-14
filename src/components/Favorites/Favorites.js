@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Favorites.css";
 import { connect } from "react-redux";
-import { findRenderedDOMComponentWithClass } from "react-dom/test-utils";
+
 
 class Favorites extends Component {
   constructor(props) {
@@ -32,8 +32,7 @@ class Favorites extends Component {
       }),
     })
       .then((res) => res.json())
-      .then((data) => this.setState({id: data.id}));
-    this.setState({ link: true });
+      .then((data) => this.setState({id: data.id, link: true}));
   };
 
   render() {
@@ -46,17 +45,19 @@ class Favorites extends Component {
         />
         <ul className="favorites__list">
           {this.props.favouriteMovie.map((item, index) =>
-            
+             {return item && <div className="favorites__lists">
               <li key={item.imdbID}>
                 {item.Title} ({item.Year}){" "}
               </li>
-            
+              <button onClick={() => this.props.deleteFavorites(item)}>X</button>
+              </div>  }
           )}
         </ul>
         <a href={`/list/${this.state.id}`} className={this.state.link ? "" : "hidden"}>
           {" "}
-          A
+          My link
         </a>
+        <br></br>
         <br></br>
         <button
           type="button"
@@ -77,5 +78,10 @@ const mapStateToProps = (store) => {
     favouriteMovie: store.favouriteMovie,
   };
 };
+const mapDispatchToProps = (dispatch) => { 
+  return { 
+    deleteFavorites: (movie) => dispatch({ type: "DELETE_FAVORITES", payload:movie}), 
+  }; 
+}; 
 
-export default connect(mapStateToProps)(Favorites);
+export default connect(mapStateToProps,mapDispatchToProps)(Favorites);

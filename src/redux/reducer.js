@@ -1,19 +1,40 @@
-const initialState = { 
-  movies: [], 
-  favouriteMovie: [], 
-}; 
- 
-const reducer = (state = initialState, action) => { 
-  switch (action.type) { 
-    case "ADD_MOVIE": 
-      return { ...state, movies: action.payload }; 
-    case "ADD_FAVORITES":   
-    var arr = [...state.favouriteMovie,action.payload];
-    var myarr = arr.map((item,index) =>  {return arr.indexOf(item) !== index ? null : item } )
-      return { ...state, favouriteMovie: myarr }; 
-    default: 
-      return state; 
-  } 
-}; 
- 
+const initialState = {
+  movies: [],
+  favouriteMovie: [],
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_MOVIE":
+      return { ...state, movies: action.payload };
+    case "ADD_FAVORITES":
+      
+      let myItem = state.favouriteMovie.find(
+        (item) => item && item.imdbID === action.payload.imdbID
+      );
+      if (myItem === undefined) {
+        return {
+          ...state,
+          favouriteMovie: [...state.favouriteMovie, action.payload],
+        };
+      }
+
+      return state;
+
+      case "DELETE_FAVORITES":
+      
+      let myDelete = state.favouriteMovie.map(
+        (item) =>  {if(item && item.imdbID !== action.payload.imdbID){return item}}
+      );
+      console.log(myDelete)
+      return {
+        ...state,
+        favouriteMovie: myDelete
+      };
+
+    default:
+      return state;
+  }
+};
+
 export default reducer;

@@ -20,14 +20,14 @@ class ListPage extends Component {
         <h1 className="list-page__title">Мой список</h1>
         <ul>
           {this.state.movies.map((item) => {
-            return (
+            return item && 
               <li key={item.imdbID}>
-                <a href="https://www.imdb.com/title/tt0068646/" target="_blank">
+                <a href={`https://www.imdb.com/title/${item.imdbID}`} target="_blank" rel="noopener noreferrer" >
                   {item.Title} ({item.Year})
                 </a>
               </li>
-            );
-          })}
+          
+        })}
         </ul>
       </div>
     );
